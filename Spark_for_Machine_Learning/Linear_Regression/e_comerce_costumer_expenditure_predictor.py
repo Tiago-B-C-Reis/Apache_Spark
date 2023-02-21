@@ -21,7 +21,7 @@ for item in data.head():
     print(item)
 print(data.columns)
 
-# Input the columns values and agregate them to form a vector that is the output features
+# Input the columns values and aggregate them to form a vector that is the output features
 # hat we need to feed on the mode:
 assembler = VectorAssembler(
     inputCols=["Avg Session Length", "Time on App",
@@ -45,6 +45,7 @@ lr = LinearRegression(featuresCol='features',
                       labelCol='Yearly Amount Spent',
                       predictionCol='prediction')
 lr_model = lr.fit(train_data)
+
 # Evaluate the model on the test set:
 test_results = lr_model.evaluate(test_data)
 test_results.residuals.show()
