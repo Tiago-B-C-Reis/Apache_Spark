@@ -4,6 +4,7 @@ Spark Streaming, Machine Learning, Spark DataFrames and more.
 # Used platforms:
 + Spark with pySpark (IDE: PyCharm)
 + Databricks
++ Jupyter Notebook
 
 ---
 
