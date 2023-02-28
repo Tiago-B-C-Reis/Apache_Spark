@@ -1,5 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.ml.clustering import KMeans
+from pyspark.ml.evaluation import ClusteringEvaluator
 
 spark = SparkSession.builder.appName('cluster').getOrCreate()
 
@@ -16,10 +17,21 @@ final_data.show()
 kmeans = KMeans().setK(3).setSeed(1)
 model = kmeans.fit(final_data)
 
-# Evaluate clustering by computing Within Set Sum of Squared Errors (WSSSE):
-wssse = model.computeCost(final_data)
-print("Within Set Sum of Squared Errors = " + str(wssse))
 
+# This WSSSE is deprecated after Spark 3.0.0
+# Evaluate clustering by computing Within Set Sum of Squared Errors (WSSSE):
+    # wssse = model.computeCost(final_data)
+    # print("Within Set Sum of Squared Errors = " + str(wssse))
+
+# So now we use this one:
+# Make predictions
+predictions = model.transform(final_data)
+# Evaluate clustering by computing Silhouette score
+evaluator = ClusteringEvaluator()
+silhouette = evaluator.evaluate(predictions)
+print("Silhouette with squared euclidean distance = " + str(silhouette))
+
+print("\n")
 
 # Shows the results:
 centers = model.clusterCenters()
