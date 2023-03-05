@@ -41,7 +41,7 @@ Spark Streaming, Machine Learning, Spark DataFrames and more.
     + [Start-up hack problem - Description included](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Clustering/Project/Start_Up_Hack_Problem).
 + [Recommender System](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Recommender_Systems).
   + Project:
-    + [Movie rank predictor - Description included]().
+    + [Movie rank predictor - Description included](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Recommender_Systems/Project).
 + [Natural Language Processing](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Natural_Language_Processing).
   + Projects:
     + [Spam_Detection_Filter - Description included](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Natural_Language_Processing/Project).
