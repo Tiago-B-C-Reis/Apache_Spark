@@ -30,8 +30,8 @@ Spark Streaming, Machine Learning, Spark DataFrames and more.
     + [E-commerce costumer expenditure - Description included](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Linear_Regression/Project/E_Commerce_Costumer_Expenditure).
 + [Logistic Regression](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Logistic_Regression).
   + Projects:
-    + [Churn predictor - Description included](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Logistic_Regression/Project/Churn_predictor).
-    + [Titanic survival - Description included](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Logistic_Regression/Project/Titanic_survival).
+    + [Churn predictor - Description included](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Logistic_Regression/Project/Churn_Predictor).
+    + [Titanic survival - Description included](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Logistic_Regression/Project/Titanic_Survival).
 + [Tree Methods](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Tree_Methods).
   + Project:
     + [Dog food spoil predictor - Description included](https://github.com/Tiago-B-C-Reis/Apache_Spark/tree/main/Spark_for_Machine_Learning/Tree_Methods/Project).
