@@ -3,7 +3,10 @@
 
 # # Spark DataFrames Project Exercise 
 
-# Let's get some quick practice with your new Spark DataFrame skills, you will be asked some basic questions about some stock market data, in this case Walmart Stock from the years 2012-2017. This exercise will just ask a bunch of questions, unlike the future machine learning exercises, which will be a little looser and be in the form of "Consulting Projects", but more on that later!
+# Let's get some quick practice with your new Spark DataFrame skills, you will be asked some basic questions about
+# some stock market data, in this case Walmart Stock from the years 2012-2017. This exercise will just ask a bunch
+# of questions, unlike the future machine learning exercises, which will be a little looser and be in the form of
+# "Consulting Projects", but more on that later!
 # 
 # For now, just answer the questions and complete the tasks below.
 
