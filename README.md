@@ -1,4 +1,4 @@
-![Screenshot from 2023-03-01 13-23-32.png](Screenshot%20from%202023-03-01%2013-23-32.png)
+![Screenshot from 2023-03-01 13-23-32.png](ApacheSpark.png)
 # Apache Spark
 Spark Streaming, Machine Learning, Spark DataFrames and more.
 
