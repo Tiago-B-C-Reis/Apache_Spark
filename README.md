@@ -1,4 +1,4 @@
-![Screenshot from 2023-03-01 13-23-32.png](ApacheSpark.png)
+![ApacheSpark_env.png](ApacheSpark_env.png)
 # Apache Spark
 Spark Streaming, Machine Learning, Spark DataFrames and more.
 
