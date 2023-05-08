@@ -9,7 +9,7 @@ ssc = StreamingContext(sc, 1)
 lines = ssc.socketTextStream('localhost', 9999)
 
 # Transform (split) that line into a list of words:
-words = lines.flatMap(lambda line: line.split(''))
+words = lines.flatMap(lambda line: line.split(' '))
 
 # Count each word in each batch
 pairs = words.map(lambda word: (word, 1))

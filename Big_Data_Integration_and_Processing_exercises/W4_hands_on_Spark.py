@@ -5,19 +5,19 @@ spark = SparkSession.builder.appName('exercises').getOrCreate()
 
 
 # Read the text file
-DataFrame = spark.read.text('words.txt')
+lines = spark.read.text('words.txt')
 
 
 # Show the first 5 lines of the text file:
-DataFrame.show(5, truncate=False)
+lines.show(5, truncate=False)
 
 # Count the number of lines
-num_lines = DataFrame.count()
+num_lines = lines.count()
 # Print the number of lines
 print("Number of lines in the file: {}".format(num_lines))
 
 # Split each line into words.
-words = DataFrame.rdd.flatMap(lambda line: line[0].split(" "))
+words = lines.rdd.flatMap(lambda line: line[0].split(" "))
 # Count the number of words
 num_words = words.count()
 # Print the number of words
