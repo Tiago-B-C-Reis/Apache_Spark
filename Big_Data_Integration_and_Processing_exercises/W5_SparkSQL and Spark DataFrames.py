@@ -38,5 +38,3 @@ df_2.show(5)
 merge_df = df.join(df_2, "userid")
 merge_df.printSchema()
 merge_df.show(5)
-
-
