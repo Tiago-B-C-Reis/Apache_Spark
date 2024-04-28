@@ -1,0 +1,44 @@
+# Imports
+import os
+from pyspark.sql import SparkSession
+# Importing SparkSQL (SparkSession and Row)
+from pyspark.sql import SparkSession, Row
+# Importing PyDeequ
+import pydeequ
+from pyspark.sql import *
+import datetime
+
+
+# Create SparkSession
+spark = SparkSession \
+    .builder \
+    .master("local[2]") \
+    .appName("DataFrames_exrcises") \
+    .config("spark.executor.memory", "1g") \
+    .config("spark.driver.memory", "1g") \
+    .config("spark.cores.max", "2") \
+    .appName('sessio1').getOrCreate()
+
+
+# Create SparkSession
+spark = SparkSession.builder.config("spark.jars.packages", pydeequ.deequ_maven_coord) \
+    .config("spark.jars. excludes", pydeequ. f2j_maven_coord).getOrCreate()
+    
+
+def toDT(datetime_str=None):
+    if datetime_str is None:
+        return datetime.datetime.now()
+    return datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M:%S')
+
+# create a dataframe
+users_data = [
+    Row(id=990, name="underage 1", age=12, city="Porto", updated_at=toDT('2020-01-02 10:15:10')),
+    Row(id=991, name="underage 2", age=15, city="Lisbon", updated_at=toDT('2024-01-03 10:15:10')),
+    Row(id=123, name="user 1", age=30, city=None, updated_at=toDT('2024-01-04 10:15:10')),
+    Row(id=124, name="user 2", age=31, city="Coimbra", updated_at=toDT('2024-01-05 10:15:10')),
+    Row(id=125, name="user 3", age=22, city="Porto", updated_at=toDT('2024-01-06 10:15:10')),
+    Row(id=126, name="user 4", age=33, city="Porto", updated_at=toDT('2024-01-07 10:15:10')),
+    Row(id=127, name="ze", age=19, city="Lisbon", updated_at=toDT())
+]
+
+users_df = spark.createDataFrame(users_data)
