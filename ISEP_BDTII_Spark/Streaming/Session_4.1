@@ -35,10 +35,13 @@ values_count = split_lines.select(
     split_lines.row[2].alias("faults")
     )
 
+score_counts = values_count.groupBy("score").count()
+
+
 # Start running the query that prints the running counts to the console​
-query = values_count \
+query = score_counts \
     .writeStream \
-    .outputMode("update") \
+    .outputMode("complete") \
     .format("console") \
     .start()
 query.awaitTermination()
