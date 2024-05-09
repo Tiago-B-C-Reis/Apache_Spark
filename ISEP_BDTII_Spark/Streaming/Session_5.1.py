@@ -15,8 +15,8 @@ sc.setLogLevel("ERROR")
 lines = (
     spark.readStream.format("socket")
     .option("host", "localhost")
-    .option("port", "9999")
-    .option("includeTimestamp", "True")
+    .option("port", 9999)
+    .option("includeTimestamp", True)
     .load()
 )
 
@@ -43,14 +43,19 @@ values_count = split_lines.select(
 # we will use a tumbling window instead of a sliding window
 values_count = (
     values_count.groupBy(
-        window(values_count.timestamp, "20 seconds", "5 seconds"), values_count.player
+        window(
+            values_count.timestamp, 
+            "20 seconds", 
+            "5 seconds"
+            ), 
+        values_count.player
     )
     .agg(sum(col("score")), sum(col("faults")))
     .orderBy("window")
 )
 
 # create an output stream to our console in complete output mode
-# also experiment with using the append output mode and understand their differences
+# Also experiment with using the append output mode and understand their differences
 #
 # we want our application to probe for new messages every 5 seconds
 query = (
@@ -60,5 +65,5 @@ query = (
     .start()
 )
 
-# await for a termination signal to end the stream
+# Await for a termination signal to end the stream
 query.awaitTermination()

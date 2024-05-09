@@ -1,0 +1,31 @@
+# Create Kafka topic named "player-score-log" with 2 partitions and replication factor of 1:
+    docker exec -it kafka kafka-topics.sh --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1 --create --topic player-score-log
+
+
+{
+    "player": "<player_name>", // string
+    "window": "<window_begin_timestamp>", // string
+    "score": <score>, // integer
+    "faults": <faults> // integer
+}
+
+
+player1:520:2
+player2:532:0
+player2:498:1
+player1:566:4
+player1:480:0
+
+
+
+
+players_Score = (
+    players_Score.groupBy(
+        window(
+            split_lines.timestamp, # time column
+            "20 seconds", # Window duration
+            "5 seconds" # Slide duration
+        ),
+        col("player") # select the "player" column from "players_Score" table
+    ).agg(sum((col("score")), sum((col("faults"))))) # order output by window column
+)
