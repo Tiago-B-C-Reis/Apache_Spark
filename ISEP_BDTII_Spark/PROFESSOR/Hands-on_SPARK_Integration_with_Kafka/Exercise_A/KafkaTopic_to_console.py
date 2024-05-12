@@ -4,57 +4,61 @@ from pyspark.sql.types import *
 import os
 import json
 
-
+# Spark Session
 spark = SparkSession.builder \
     .appName("KafkaTopic_to_console") \
         .getOrCreate()
 
-
 # configs
-brokers = "localhost:9092"
+broker = "localhost:9092"
 topic = "player-score-log"
+checkpoint_dir = os.getcwd() + "/checkpoint_Kafka_Reading/"
+
 
 # Define the schema for JSON messages
-schema = StructType([
-    StructField("player", StringType()),
-    StructField("window", StringType()),
-    StructField("score", IntegerType()),
-    StructField("faults", IntegerType())
-])
-
-# Read messages from Kafka topic
-messages = (
-    spark.readStream.format("kafka")
-    .option("kafka.bootstrap.servers", brokers)
-    .option("subscribe", topic)
-    .load()
+schema = (
+StructType()
+.add("player", StringType())
+.add("window", TimestampType())
+.add("score", IntegerType())
+.add("faults", IntegerType())
 )
 
-# Parse JSON messages and select required columns
-parsed_messages = (
-    messages.select(
-        from_json(col("value").cast("string"), schema).alias("data")
-    )
-    .select(
-        col("data.player").alias("player"),
-        col("data.score").alias("score"),
-        col("data.faults").alias("faults")
-    )
+
+# Read from Kafka topic
+# Using Kafka as Source for Structured Streaming
+values_count = (
+spark.readStream \
+    .format("kafka") \
+    .option("kafka.bootstrap.servers", broker) \
+    .option("subscribe", topic) \
+    .load() \
+    .select(from_json(col("value").cast("string"), schema).alias("values")) # Digest the input JSON
 )
 
-# Aggregate scores and faults by player
-aggregated_data = (
-    parsed_messages.groupBy("player")
-    .agg(sum("score").alias("total_score"), sum("faults").alias("total_faults"))
+values_count = values_count.selectExpr(
+    "values['player'] AS player",
+    "values['window'] AS window",
+    "values['score'] AS score",
+    "values['faults'] AS faults",
 )
 
-# Write aggregated data to the console
-query = (
-    aggregated_data.writeStream
-    .outputMode("complete")
-    .format("console")
+# If we set the third parameter of the window function to None,
+# We will use a tumbling window instead of a sliding window
+values_count = values_count.groupBy(
+    window(
+        values_count.window,  # time column
+        "20 seconds", # Window duration
+        "5 seconds" # Slide duration
+        ), 
+    values_count.player
+).agg(sum(col("score")), sum(col("faults")))
+
+
+query = values_count.writeStream \
+    .outputMode("complete") \
+    .format("console") \
+    .option("checkpointLocation", checkpoint_dir) \
     .start()
-)
-
-print("Ready to read from Kafka topic:", brokers)
+    
 query.awaitTermination()
